@@ -1,6 +1,4 @@
 import {
-  Icon28BookOutline,
-  Icon28GridLayoutOutline,
   Icon28ListOutline,
   Icon28UserCircleOutline,
 } from "@vkontakte/icons";
@@ -16,22 +14,6 @@ const TabBarNavigator = observer(() => {
 
   return (
     <Tabbar itemsLayout="vertical">
-      <TabbarItem
-        onClick={onStoryChange}
-        selected={navigation.activeStory === "words"}
-        data-story="words"
-        text="Слова"
-      >
-        <Icon28BookOutline />
-      </TabbarItem>
-      <TabbarItem
-        onClick={onStoryChange}
-        selected={navigation.activeStory === "puzzles"}
-        data-story="puzzles"
-        text="Пазлы"
-      >
-        <Icon28GridLayoutOutline />
-      </TabbarItem>
       <TabbarItem
         onClick={onStoryChange}
         selected={navigation.activeStory === "tests"}
