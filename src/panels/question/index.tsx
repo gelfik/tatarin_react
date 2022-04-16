@@ -16,8 +16,21 @@ import { observer } from "mobx-react";
 import { Fragment } from "react";
 import "../style.css";
 import { Icon28PlayCircle, Icon28PauseCircle } from "@vkontakte/icons";
+import { useStores } from "../../hooks/mobx";
+import { useNavigation } from "../../hooks/navigation";
 
 const Question = observer(() => {
+  const navigation = useNavigation();
+  const { testStore } = useStores();
+
+  const getNexQuestion = (): string => {
+    if (testStore.test.length === testStore.index) {
+      return "result";
+    } else {
+      return `question_${testStore.index + 1}`;
+    }
+  };
+
   // @ts-ignore
   let lol = new Audio(
     "https://izzibrain.gelfik.dev/media/morgenshtern_-_selyavi_muzati.net.mp3"
@@ -33,7 +46,7 @@ const Question = observer(() => {
 
   return (
     <Fragment>
-      <PanelHeader>Вопрос</PanelHeader>
+      <PanelHeader>Вопрос {testStore.index + 1}</PanelHeader>
       <Div className={"bg_main_image"}>
         {/*<Div className={"bg_main_image"}>*/}
         <Group
@@ -72,7 +85,10 @@ const Question = observer(() => {
               className={"button_width"}
               size={"l"}
               mode={"secondary"}
-              onClick={() => {}}
+              onClick={() => {
+                testStore.incIndex();
+                navigation.setActivePanel(getNexQuestion());
+              }}
             >
               Дальше!
             </Button>

@@ -19,9 +19,15 @@ class TestStore {
   @action setIndex = (index: number) => {
     this._index = index;
   };
+  @action incIndex = () => {
+    this._index = this._index++;
+  };
 
   @computed get test() {
     return toJS(this._test);
+  }
+  @computed get activeTest() {
+    return toJS(this._test[this.index]);
   }
   @computed get index() {
     return toJS(this._index);
