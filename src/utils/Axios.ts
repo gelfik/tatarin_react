@@ -2,7 +2,7 @@ import axios from "axios";
 
 const InitializeAxios = () => {
   const $axios = axios.create({
-    baseURL: "https://test.ru/",
+    baseURL: "https://izzibrain.gelfik.dev/api/tatar/",
   });
 
   const queryParams = {};
@@ -44,7 +44,7 @@ const InitializeAxios = () => {
       console.error(err);
     }
   );
-  $axios.post("api");
+  $axios.get("generate_test");
   return $axios;
 };
 
