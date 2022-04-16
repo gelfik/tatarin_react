@@ -1,3 +1,4 @@
+import TestStore from "./TestStore";
 import UserStore from "./UserStore";
 import VKBridge from "./VKBridge";
 import NavigationStore from "./NavigationStore";
@@ -9,12 +10,14 @@ class RootStore {
   vkBridge: VKBridge;
   $axios: AxiosInstance;
   userStore: UserStore;
+  testStore: TestStore;
 
   constructor() {
+    this.$axios = InitializeAxios();
     this.navigation = new NavigationStore();
     this.vkBridge = new VKBridge();
-    this.$axios = InitializeAxios();
     this.userStore = new UserStore(this.vkBridge);
+    this.testStore = new TestStore(this.$axios);
   }
 }
 

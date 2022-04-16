@@ -18,7 +18,8 @@ import "../style.css";
 import { Icon28PlayCircle, Icon28PauseCircle } from "@vkontakte/icons";
 
 const Question = observer(() => {
-  const lol = new Audio(
+  // @ts-ignore
+  let lol = new Audio(
     "https://izzibrain.gelfik.dev/media/morgenshtern_-_selyavi_muzati.net.mp3"
   );
 

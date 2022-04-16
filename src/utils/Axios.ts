@@ -2,7 +2,7 @@ import axios from "axios";
 
 const InitializeAxios = () => {
   const $axios = axios.create({
-    baseURL: "https://izzibrain.gelfik.dev/api/tatar/",
+    baseURL: "https://izzibrain.gelfik.dev/api/tatar",
   });
 
   const queryParams = {};
@@ -23,28 +23,11 @@ const InitializeAxios = () => {
     processQueryParam(key, value);
   }
 
-  console.log(queryParams);
   $axios.defaults.params = queryParams;
   $axios.defaults.headers.post["Content-Type"] = "application/json";
   $axios.defaults.headers.put["Content-Type"] = "application/json";
   $axios.defaults.headers.patch["Content-Type"] = "application/json";
 
-  $axios.interceptors.request.use(
-    function (config) {
-      // const token = token_store.get();
-      // if (token) {
-      //   config.headers.Authorization = "Token " + token;
-      // }
-      // if (config.url.includes("undefined")) {
-      //   return;
-      // }
-      return config;
-    },
-    (err) => {
-      console.error(err);
-    }
-  );
-  $axios.get("generate_test");
   return $axios;
 };
 

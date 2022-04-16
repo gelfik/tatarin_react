@@ -1,11 +1,14 @@
 import { Panel, Root, ScreenSpinner, View } from "@vkontakte/vkui";
 import { observer } from "mobx-react";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
+import { useStores } from "../hooks/mobx";
 import { useNavigation } from "../hooks/navigation";
+import { data } from "../models/test";
 import Question from "../panels/question";
 import Start from "../panels/start";
 
 const Navigator = observer(({ loading }) => {
+  const { testStore } = useStores();
   const navigation = useNavigation();
 
   const popout = useMemo(() => {
@@ -16,20 +19,26 @@ const Navigator = observer(({ loading }) => {
     }
   }, [loading]);
 
+  useEffect(() => {
+    // testStore.loadTest();
+    testStore.setTest(data);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
-      <Root id={'main'} activeView={navigation.activeStory}>
-        <View id={"tests"} activePanel={navigation.activePanel} popout={popout}>
-          <Panel id={"default"}>
-            <Start />
-          </Panel>
-          <Panel id={"question_1"}>
-            <Question />
-          </Panel>
-        </View>
-        <View id={"profile"} activePanel={navigation.activePanel} popout={popout}>
-          <Panel id={"default"}>Контент панели дефаулт</Panel>
-        </View>
-      </Root>
+    <Root id={"main"} activeView={navigation.activeStory}>
+      <View id={"tests"} activePanel={navigation.activePanel} popout={popout}>
+        <Panel id={"default"}>
+          <Start />
+        </Panel>
+        <Panel id={"question_1"}>
+          <Question />
+        </Panel>
+      </View>
+      <View id={"profile"} activePanel={navigation.activePanel} popout={popout}>
+        <Panel id={"default"}>Контент панели дефаулт</Panel>
+      </View>
+    </Root>
   );
 });
 
