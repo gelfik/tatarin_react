@@ -25,15 +25,23 @@ const Navigator = observer(({ loading }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const getQuestionPanels = () => {
+    testStore?.test?.map((item, i) => {
+      return (
+        <Panel key={i} id={`question_${i}`}>
+          <Question />
+        </Panel>
+      );
+    });
+  };
+
   return (
     <Root id={"main"} activeView={navigation.activeStory}>
       <View id={"tests"} activePanel={navigation.activePanel} popout={popout}>
         <Panel id={"default"}>
           <Start />
         </Panel>
-        <Panel id={"question_1"}>
-          <Question />
-        </Panel>
+        {getQuestionPanels()}
       </View>
       <View id={"profile"} activePanel={navigation.activePanel} popout={popout}>
         <Panel id={"default"}>Контент панели дефаулт</Panel>
