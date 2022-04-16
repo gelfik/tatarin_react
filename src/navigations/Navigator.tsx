@@ -2,9 +2,8 @@ import { Epic, Panel, ScreenSpinner, View } from "@vkontakte/vkui";
 import { observer } from "mobx-react";
 import { useMemo } from "react";
 import { useNavigation } from "../hooks/navigation";
-import TabBarNavigator from "./TabBarNavigator";
-import Start from "../panels/start";
 import Question from "../panels/question";
+import Start from "../panels/start";
 
 const Navigator = observer(({ loading }) => {
   const navigation = useNavigation();

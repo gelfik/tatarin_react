@@ -1,11 +1,9 @@
+import { ContentCard, PanelHeader } from "@vkontakte/vkui";
 import { observer } from "mobx-react";
 import { Fragment } from "react";
 import "../style.css";
-import { useNavigation } from "../../hooks/navigation";
-import { ContentCard, PanelHeader } from "@vkontakte/vkui";
 
 const Question = observer(() => {
-  const navigation = useNavigation();
 
   return (
     <Fragment>
