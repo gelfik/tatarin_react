@@ -13,7 +13,7 @@ import {
   RadioGroup,
 } from "@vkontakte/vkui";
 import { observer } from "mobx-react";
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import "../style.css";
 import { Icon28PlayCircle, Icon28PauseCircle } from "@vkontakte/icons";
 import { useStores } from "../../hooks/mobx";
@@ -32,26 +32,30 @@ const Question = observer(() => {
     }
   };
 
-  // @ts-ignore
-  let lol = new Audio(
-    "https://izzibrain.gelfik.dev/media/morgenshtern_-_selyavi_muzati.net.mp3"
-  );
-
-  const startPlay = () => {
-    lol.play();
-  };
-
-  const stopPause = () => {
-    lol.pause();
-  };
+  useEffect(() => {
+    if (testStore.activeTest?.audio) {
+      testStore.setAudio(testStore.activeTest?.audio);
+    } else {
+      testStore.setAudioStatus(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [testStore.activeTest]);
 
   const getAnswerList = () => {
     return testStore.activeTest?.answer_list?.map((item, i) => (
       <Radio key={i} name="fit" value="classic">
         {item?.is_text && `${item?.answer}`}
+        {item?.is_photo && (
+          <img width={100} height={100} src={item?.answerPhoto} alt={""} />
+        )}
       </Radio>
     ));
   };
+
+  useEffect(() => {
+    console.log(testStore.audioPlayStatus);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [testStore.audioPlayStatus]);
 
   return (
     <Fragment>
@@ -63,13 +67,22 @@ const Question = observer(() => {
         >
           <Div className={"inline_objects"}>
             <Caption className={"inline_objects"}>
-              <Icon28PlayCircle onClick={startPlay} />
-              <Icon28PauseCircle onClick={stopPause} />
+              {testStore.audioStatus && (
+                <>
+                  Аудиоматериал
+                  {testStore.audioPlayStatus && (
+                    <Icon28PauseCircle onClick={testStore.stopAudio} />
+                  )}
+                  {!testStore.audioPlayStatus && (
+                    <Icon28PlayCircle onClick={testStore.playAudio} />
+                  )}
+                </>
+              )}
             </Caption>
           </Div>
 
           <FormLayout>
-            {testStore.activeTest?.answer_list && (
+            {testStore.activeTest?.answer_list?.length !== 0 && (
               <FormItem top="Выберите вариант ответа">
                 <RadioGroup>{getAnswerList()}</RadioGroup>
               </FormItem>

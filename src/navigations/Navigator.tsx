@@ -3,7 +3,6 @@ import { observer } from "mobx-react";
 import { useEffect, useMemo } from "react";
 import { useStores } from "../hooks/mobx";
 import { useNavigation } from "../hooks/navigation";
-import { data } from "../models/test";
 import Question from "../panels/question";
 import Start from "../panels/start";
 
@@ -21,7 +20,6 @@ const Navigator = observer(({ loading }) => {
 
   useEffect(() => {
     testStore.loadTest();
-    // testStore.setTest(data);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
