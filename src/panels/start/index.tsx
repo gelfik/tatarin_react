@@ -11,6 +11,7 @@ const Start = observer(() => {
   return (
     <Fragment>
       <Placeholder
+        className={"bg_main_image"}
         stretched={true}
         icon={<img className={"icon_size"} src={scullcap} alt={"scullcap"} />}
         header="Кемне күрәм мин!"
@@ -25,7 +26,7 @@ const Start = observer(() => {
             size={"l"}
             mode={"secondary"}
             onClick={() => {
-              navigation.setActivePanel("question_1");
+              navigation.setActivePanel("question_0");
             }}
           >
             АЙДА!

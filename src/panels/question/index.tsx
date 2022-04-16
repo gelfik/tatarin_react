@@ -53,12 +53,11 @@ const Question = observer(() => {
           className={"fill_radioButton"}
           header={<Header>Текст вопроса</Header>}
         >
-          <Div style={{ display: "block" }}>
-            <Caption>
-              Аудиоматериал
+          <Div className={"inline_objects"}>
+            <Caption className={"inline_objects"}>
               <Icon28PlayCircle onClick={startPlay} />
+              <Icon28PauseCircle onClick={stopPause} />
             </Caption>
-            <Icon28PauseCircle onClick={stopPause} />
           </Div>
           <FormLayout>
             <FormItem top="Выберите вариант ответа">
