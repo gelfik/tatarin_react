@@ -23,11 +23,12 @@ const Question = observer(() => {
   const navigation = useNavigation();
   const { testStore } = useStores();
 
-  const getNexQuestion = (): string => {
+  const getNexQuestion = (): void => {
     if (testStore.test.length === testStore.index) {
-      return "result";
+      navigation.setActivePanel("result");
     } else {
-      return `question_${testStore.index + 1}`;
+      testStore.incIndex();
+      navigation.setActivePanel(`question_${testStore.index}`);
     }
   };
 
@@ -44,14 +45,21 @@ const Question = observer(() => {
     lol.pause();
   };
 
+  const getAnswerList = () => {
+    return testStore.activeTest?.answer_list?.map((item, i) => (
+      <Radio key={i} name="fit" value="classic">
+        {item?.is_text && `${item?.answer}`}
+      </Radio>
+    ));
+  };
+
   return (
     <Fragment>
       <PanelHeader>Вопрос {testStore.index + 1}</PanelHeader>
       <Div className={"bg_main_image"}>
-        {/*<Div className={"bg_main_image"}>*/}
         <Group
           className={"fill_radioButton"}
-          header={<Header>Текст вопроса</Header>}
+          header={<Header>{testStore.activeTest?.ask}</Header>}
         >
           <Div className={"inline_objects"}>
             <Caption className={"inline_objects"}>
@@ -59,35 +67,29 @@ const Question = observer(() => {
               <Icon28PauseCircle onClick={stopPause} />
             </Caption>
           </Div>
-          <FormLayout>
-            <FormItem top="Выберите вариант ответа">
-              <RadioGroup>
-                <Radio name="fit" value="classic">
-                  Classic
-                </Radio>
-                <Radio name="fit" value="regular">
-                  Regular
-                </Radio>
-                <Radio name="fit" value="slim">
-                  Slim
-                </Radio>
-              </RadioGroup>
 
-              <Input type="text" defaultValue="Петров" />
-            </FormItem>
+          <FormLayout>
+            {testStore.activeTest?.answer_list && (
+              <FormItem top="Выберите вариант ответа">
+                <RadioGroup>{getAnswerList()}</RadioGroup>
+              </FormItem>
+            )}
+
+            {testStore.activeTest?.answer && (
+              <FormItem top="Введите ответ">
+                <Input type="text" />
+              </FormItem>
+            )}
           </FormLayout>
         </Group>
-        {/*</Div>*/}
+
         <FixedLayout vertical={"bottom"} style={{ left: 0 }}>
           <Div style={{ marginTop: "auto" }}>
             <Button
               className={"button_width"}
               size={"l"}
               mode={"secondary"}
-              onClick={() => {
-                testStore.incIndex();
-                navigation.setActivePanel(getNexQuestion());
-              }}
+              onClick={() => getNexQuestion()}
             >
               Дальше!
             </Button>

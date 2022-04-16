@@ -1,13 +1,10 @@
-import { AxiosInstance } from "axios";
 import { action, computed, makeAutoObservable, observable, toJS } from "mobx";
 import { Test } from "../models/test";
+import api from "../api";
 
 class TestStore {
-  client: AxiosInstance;
-
-  constructor($client) {
+  constructor() {
     makeAutoObservable(this);
-    this.client = $client;
   }
 
   @observable _test: Test[] = [];
@@ -20,7 +17,7 @@ class TestStore {
     this._index = index;
   };
   @action incIndex = () => {
-    this._index = this._index++;
+    this._index = this._index + 1;
   };
 
   @computed get test() {
@@ -34,8 +31,8 @@ class TestStore {
   }
 
   @action loadTest = (): void => {
-    this.client
-      .get(`/generate_test`)
+    api.test
+      .generate_test()
       .then((response) => {
         this.setTest(response.data);
       })

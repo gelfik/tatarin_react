@@ -20,19 +20,17 @@ const Navigator = observer(({ loading }) => {
   }, [loading]);
 
   useEffect(() => {
-    // testStore.loadTest();
-    testStore.setTest(data);
+    testStore.loadTest();
+    // testStore.setTest(data);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const getQuestionPanels = () => {
-    testStore?.test?.map((item, i) => {
-      return (
-        <Panel key={i} id={`question_${i}`}>
-          <Question />
-        </Panel>
-      );
-    });
+    return testStore?.test?.map((item, i) => (
+      <Panel key={i} id={`question_${i}`}>
+        <Question />
+      </Panel>
+    ));
   };
 
   return (

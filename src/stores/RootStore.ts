@@ -17,7 +17,7 @@ class RootStore {
     this.navigation = new NavigationStore();
     this.vkBridge = new VKBridge();
     this.userStore = new UserStore(this.vkBridge);
-    this.testStore = new TestStore(this.$axios);
+    this.testStore = new TestStore();
   }
 }
 
