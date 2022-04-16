@@ -11,13 +11,20 @@ class TestStore {
   }
 
   @observable _test: Test[] = [];
+  @observable _index: number = 0;
 
   @action setTest = (test: Test[]) => {
     this._test = test;
   };
+  @action setIndex = (index: number) => {
+    this._index = index;
+  };
 
   @computed get test() {
     return toJS(this._test);
+  }
+  @computed get index() {
+    return toJS(this._index);
   }
 
   @action loadTest = (): void => {
