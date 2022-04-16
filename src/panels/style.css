@@ -2,13 +2,18 @@ html, body {
     min-height: 100%;
 }
 
+.vkuiHeader__content-in{
+    white-space: normal;
+    overflow: auto;
+}
+
 .button_width {
     width: 100%;
 }
 
 .icon_size {
-    width: 56px;
-    height: 56px;
+    width: 96px;
+    height: 96px;
 }
 
 .bg_main_image {
