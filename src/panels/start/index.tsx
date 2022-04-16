@@ -3,8 +3,8 @@ import { Button, Div, FixedLayout, Placeholder } from "@vkontakte/vkui";
 import { Fragment } from "react";
 import "../style.css";
 import { useNavigation } from "../../hooks/navigation";
-import scullcap from "../../svg/scullcap.svg";
-
+// import scullcap from "../../svg/scullcap.svg";
+import flower from "../../svg/flower.svg";
 const Start = observer(() => {
   const navigation = useNavigation();
 
@@ -13,7 +13,8 @@ const Start = observer(() => {
       <Placeholder
         className={"bg_main_image"}
         stretched={true}
-        icon={<img className={"icon_size"} src={scullcap} alt={"scullcap"} />}
+        // icon={<img className={"icon_size"} src={scullcap} alt={"scullcap"} />}
+        icon={<img className={"icon_size"} src={flower} alt={"flower"} />}
         header="Кемне күрәм мин!"
       >
         В этом маленьком приложении ты сможешь узнать насколько ты являешься
