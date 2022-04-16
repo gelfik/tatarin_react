@@ -3,6 +3,8 @@ import { observer } from "mobx-react";
 import { useMemo } from "react";
 import { useNavigation } from "../hooks/navigation";
 import TabBarNavigator from "./TabBarNavigator";
+import Start from "../panels/start";
+import Question from "../panels/question";
 
 const Navigator = observer(({ loading }) => {
   const navigation = useNavigation();
@@ -16,16 +18,17 @@ const Navigator = observer(({ loading }) => {
   }, [loading]);
 
   return (
-    <Epic activeStory={navigation.activeStory} tabbar={<TabBarNavigator />}>
+    <Epic activeStory={navigation.activeStory}>
       <View id={"tests"} activePanel={navigation.activePanel} popout={popout}>
         <Panel id={"default"}>
-          Контент панели дефаулт
+          <Start />
+        </Panel>
+        <Panel id={"question_1"}>
+          <Question />
         </Panel>
       </View>
       <View id={"profile"} activePanel={navigation.activePanel} popout={popout}>
-        <Panel id={"default"}>
-          Контент панели дефаулт
-        </Panel>
+        <Panel id={"default"}>Контент панели дефаулт</Panel>
       </View>
     </Epic>
   );
