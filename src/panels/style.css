@@ -12,7 +12,11 @@ html, body {
 }
 
 .bg_main_image {
-    background-image: url(../img/3.jpg);
+    height: 100%;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    background-image: url("/src/img/3.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;

@@ -1,4 +1,4 @@
-import { Epic, Panel, ScreenSpinner, View } from "@vkontakte/vkui";
+import { Panel, Root, ScreenSpinner, View } from "@vkontakte/vkui";
 import { observer } from "mobx-react";
 import { useMemo } from "react";
 import { useNavigation } from "../hooks/navigation";
@@ -17,19 +17,19 @@ const Navigator = observer(({ loading }) => {
   }, [loading]);
 
   return (
-    <Epic activeStory={navigation.activeStory}>
-      <View id={"tests"} activePanel={navigation.activePanel} popout={popout}>
-        <Panel id={"default"}>
-          <Start />
-        </Panel>
-        <Panel id={"question_1"}>
-          <Question />
-        </Panel>
-      </View>
-      <View id={"profile"} activePanel={navigation.activePanel} popout={popout}>
-        <Panel id={"default"}>Контент панели дефаулт</Panel>
-      </View>
-    </Epic>
+      <Root id={'main'} activeView={navigation.activeStory}>
+        <View id={"tests"} activePanel={navigation.activePanel} popout={popout}>
+          <Panel id={"default"}>
+            <Start />
+          </Panel>
+          <Panel id={"question_1"}>
+            <Question />
+          </Panel>
+        </View>
+        <View id={"profile"} activePanel={navigation.activePanel} popout={popout}>
+          <Panel id={"default"}>Контент панели дефаулт</Panel>
+        </View>
+      </Root>
   );
 });
 

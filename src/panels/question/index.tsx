@@ -17,45 +17,47 @@ import "../style.css";
 
 const Question = observer(() => {
   return (
-    <Fragment>
-      <PanelHeader>Вопрос</PanelHeader>
-      <Div className={"bg_main_image"}>
-        <Group
-          className={"fill_radioButton"}
-          header={<Header>Текст вопроса</Header>}
-        >
-          <FormLayout>
-            <FormItem top="Выберите вариант ответа">
-              <RadioGroup>
-                <Radio name="fit" value="classic">
-                  Classic
-                </Radio>
-                <Radio name="fit" value="regular">
-                  Regular
-                </Radio>
-                <Radio name="fit" value="slim">
-                  Slim
-                </Radio>
-              </RadioGroup>
-
-              <Input type="text" defaultValue="Петров" />
-            </FormItem>
-          </FormLayout>
-        </Group>
-      </Div>
-      <FixedLayout vertical={"bottom"}>
-        <Div>
-          <Button
-            className={"button_width"}
-            size={"l"}
-            mode={"secondary"}
-            onClick={() => {}}
+      <Fragment>
+        <PanelHeader>Вопрос</PanelHeader>
+        <Div className={"bg_main_image"}>
+          {/*<Div className={"bg_main_image"}>*/}
+          <Group
+              className={"fill_radioButton"}
+              header={<Header>Текст вопроса</Header>}
           >
-            Дальше!
-          </Button>
+            <FormLayout>
+              <FormItem top="Выберите вариант ответа">
+                <RadioGroup>
+                  <Radio name="fit" value="classic">
+                    Classic
+                  </Radio>
+                  <Radio name="fit" value="regular">
+                    Regular
+                  </Radio>
+                  <Radio name="fit" value="slim">
+                    Slim
+                  </Radio>
+                </RadioGroup>
+
+                <Input type="text" defaultValue="Петров" />
+              </FormItem>
+            </FormLayout>
+          </Group>
+          {/*</Div>*/}
+          <FixedLayout vertical={"bottom"} style={{left: 0}}>
+            <Div style={{marginTop: 'auto'}}>
+              <Button
+                  className={"button_width"}
+                  size={"l"}
+                  mode={"secondary"}
+                  onClick={() => {}}
+              >
+                Дальше!
+              </Button>
+            </Div>
+          </FixedLayout>
         </Div>
-      </FixedLayout>
-    </Fragment>
+      </Fragment>
   );
 });
 
