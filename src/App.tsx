@@ -10,7 +10,7 @@ const App = observer(() => {
 
   return (
     <Provider {...rootStore}>
-      <ConfigProvider appearance="dark">
+      <ConfigProvider appearance="light">
         <AdaptivityProvider>
           <AppRootNavigator />
         </AdaptivityProvider>
