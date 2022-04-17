@@ -33,5 +33,5 @@ html, body {
 }
 
 .inline_objects{
-    display: flex;
+    margin-top: 1rem;
 }
