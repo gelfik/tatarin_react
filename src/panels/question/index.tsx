@@ -128,11 +128,6 @@ const Question = observer(() => {
                       getNexQuestion();
                       testStore.setPopout(null);
                     }}
-                    iosCloseItem={
-                      <ActionSheetItem autoclose mode="cancel">
-                        Отменить
-                      </ActionSheetItem>
-                    }
                     header={testStore.activeTest.description}
                     toggleRef={titleTargetRef}
                   >
