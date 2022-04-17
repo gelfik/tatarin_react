@@ -9,6 +9,7 @@ html, body {
 
 .button_width {
     width: 100%;
+    margin: auto;
 }
 
 .icon_size {
