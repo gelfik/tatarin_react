@@ -33,7 +33,11 @@ const Navigator = observer(({ loading }) => {
 
   return (
     <Root id={"main"} activeView={navigation.activeStory}>
-      <View id={"tests"} activePanel={navigation.activePanel} popout={popout}>
+      <View
+        id={"tests"}
+        activePanel={navigation.activePanel}
+        popout={popout ? popout : testStore.popout ? testStore.popout : null}
+      >
         <Panel id={"default"}>
           <Start />
         </Panel>

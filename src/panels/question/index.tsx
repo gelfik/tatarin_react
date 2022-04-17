@@ -1,4 +1,6 @@
 import {
+  ActionSheet,
+  ActionSheetItem,
   Button,
   Caption,
   Div,
@@ -12,7 +14,7 @@ import {
   RadioGroup,
 } from "@vkontakte/vkui";
 import { observer } from "mobx-react";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import "../style.css";
 import { Icon28PlayCircle, Icon28PauseCircle } from "@vkontakte/icons";
 import { useStores } from "../../hooks/mobx";
@@ -25,8 +27,9 @@ const Question = observer(() => {
 
   const [value, setValue] = useState("");
 
+  const titleTargetRef = useRef();
+
   const getNexQuestion = (): void => {
-    testStore.addResult(validateResult(testStore.activeTest, value));
     if (testStore.test.length - 1 === testStore.index) {
       navigation.setActivePanel("result");
     } else {
@@ -114,10 +117,34 @@ const Question = observer(() => {
               className={"button_width"}
               size={"l"}
               mode={"secondary"}
-              onClick={() => getNexQuestion()}
+              getRootRef={titleTargetRef}
+              onClick={() => {
+                testStore.addResult(
+                  validateResult(testStore.activeTest, value)
+                );
+                testStore.setPopout(
+                  <ActionSheet
+                    onClose={() => {
+                      getNexQuestion();
+                      testStore.setPopout(null);
+                    }}
+                    iosCloseItem={
+                      <ActionSheetItem autoclose mode="cancel">
+                        Отменить
+                      </ActionSheetItem>
+                    }
+                    header={testStore.activeTest.description}
+                    toggleRef={titleTargetRef}
+                  >
+                    <ActionSheetItem autoclose mode="cancel">
+                      Перейти к следующему вопросу
+                    </ActionSheetItem>
+                  </ActionSheet>
+                );
+              }}
               disabled={value === ""}
             >
-              Дальше!
+              Проверить!
             </Button>
           </Div>
         </Group>

@@ -14,7 +14,7 @@ class TestStore {
   @observable _audioStatus: boolean = false;
   @observable _audioPlayStatus: boolean = false;
   @observable _result: boolean[] = [];
-  @observable _popout: null | HTMLElement = null;
+  @observable _popout: null | JSX.Element = null;
 
   @action setTest = (test: Test[]) => {
     this._test = test;
@@ -50,7 +50,7 @@ class TestStore {
     this._result.push(result);
   };
 
-  @action setPopout = (item: null | HTMLElement) => {
+  @action setPopout = (item: JSX.Element | null) => {
     this._popout = item;
   };
 
