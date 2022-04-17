@@ -82,16 +82,22 @@ const Question = observer(() => {
           )}
 
           <Header>{testStore.activeTest?.ask}</Header>
-          <Div className={"inline_objects"}>
-            <Caption className={"inline_objects"}>
+          <Div>
+            <Caption>
               {testStore.audioStatus && (
                 <>
                   Аудиоматериал
                   {testStore.audioPlayStatus && (
-                    <Icon28PauseCircle onClick={testStore.stopAudio} />
+                    <Icon28PauseCircle
+                      className={"inline_objects"}
+                      onClick={testStore.stopAudio}
+                    />
                   )}
                   {!testStore.audioPlayStatus && (
-                    <Icon28PlayCircle onClick={testStore.playAudio} />
+                    <Icon28PlayCircle
+                      className={"inline_objects"}
+                      onClick={testStore.playAudio}
+                    />
                   )}
                 </>
               )}
