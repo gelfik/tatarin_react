@@ -25,6 +25,7 @@ export interface ITest {
   is_multiple: boolean;
   answer?: string | null;
   answer_list: IAnswerList[];
+  description?: string | null;
 }
 
 export class Test {
@@ -36,6 +37,7 @@ export class Test {
   public readonly is_multiple: boolean;
   public readonly answer?: string | null;
   public readonly answer_list: AnswerList[];
+  public readonly description?: string | null;
 
   // public audioFile?: typeof Audio | null;
 
@@ -48,6 +50,7 @@ export class Test {
     this.is_multiple = value?.is_multiple;
     this.answer = value?.answer;
     this.answer_list = getClassInstances(AnswerList, value?.answer_list);
+    this.description = value?.description;
     // if (this.audio) {
     //   this.audioFile = new Audio(value?.audio);
     // }
