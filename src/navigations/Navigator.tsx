@@ -4,6 +4,7 @@ import { useEffect, useMemo } from "react";
 import { useStores } from "../hooks/mobx";
 import { useNavigation } from "../hooks/navigation";
 import Question from "../panels/question";
+import Result from "../panels/result";
 import Start from "../panels/start";
 
 const Navigator = observer(({ loading }) => {
@@ -42,6 +43,9 @@ const Navigator = observer(({ loading }) => {
           <Start />
         </Panel>
         {getQuestionPanels()}
+        <Panel id={"result"}>
+          <Result />
+        </Panel>
       </View>
       <View id={"profile"} activePanel={navigation.activePanel} popout={popout}>
         <Panel id={"default"}>Контент панели дефаулт</Panel>
