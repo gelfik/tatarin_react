@@ -13,13 +13,12 @@ class TestStore {
   @observable _audio: HTMLAudioElement = new Audio();
   @observable _audioStatus: boolean = false;
   @observable _audioPlayStatus: boolean = false;
+  @observable _result: boolean[] = [];
 
   @action setTest = (test: Test[]) => {
     this._test = test;
   };
-  @action setIndex = (index: number) => {
-    this._index = index;
-  };
+
   @action incIndex = () => {
     this._index = this._index + 1;
     if (this.audioStatus) {
@@ -46,6 +45,10 @@ class TestStore {
     this._audioPlayStatus = false;
   };
 
+  @action addResult = (result: boolean) => {
+    this._result.push(result);
+  };
+
   @computed get test() {
     return toJS(this._test);
   }
@@ -60,6 +63,9 @@ class TestStore {
   }
   @computed get audioPlayStatus() {
     return toJS(this._audioPlayStatus);
+  }
+  @computed get result() {
+    return toJS(this._result);
   }
 
   @action loadTest = (): void => {
