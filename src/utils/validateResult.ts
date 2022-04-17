@@ -17,8 +17,8 @@ export const validateResult = (
     return search_status;
   }
   if (activeTestItem?.answer) {
-    const natural = require("natural");
-    let result_diff: number = natural.JaroWinklerDistance(
+    const distance = require("jaro-winkler");
+    let result_diff: number = distance(
       activeTestItem?.answer.toLowerCase(),
       value.toLowerCase()
     );
