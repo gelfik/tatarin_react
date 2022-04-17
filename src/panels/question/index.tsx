@@ -17,6 +17,7 @@ import "../style.css";
 import { Icon28PlayCircle, Icon28PauseCircle } from "@vkontakte/icons";
 import { useStores } from "../../hooks/mobx";
 import { useNavigation } from "../../hooks/navigation";
+import { validateResult } from "../../utils/validateResult";
 
 const Question = observer(() => {
   const navigation = useNavigation();
@@ -25,7 +26,8 @@ const Question = observer(() => {
   const [value, setValue] = useState("");
 
   const getNexQuestion = (): void => {
-    if (testStore.test.length === testStore.index) {
+    testStore.addResult(validateResult(testStore.activeTest, value));
+    if (testStore.test.length - 1 === testStore.index) {
       navigation.setActivePanel("result");
     } else {
       testStore.incIndex();
@@ -48,7 +50,7 @@ const Question = observer(() => {
         onChange={(e) => setValue(e.target.value)}
         key={i}
         name="answer"
-        value={item?.answer}
+        value={item?.answer ? item?.answer : item?.answerPhoto}
       >
         {item?.is_text && `${item?.answer}`}
         {item?.is_photo && (
@@ -59,7 +61,6 @@ const Question = observer(() => {
   };
 
   useEffect(() => {
-    // console.log(testStore.audioPlayStatus);
     setValue("");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [testStore.index]);

@@ -14,6 +14,7 @@ class TestStore {
   @observable _audioStatus: boolean = false;
   @observable _audioPlayStatus: boolean = false;
   @observable _result: boolean[] = [];
+  @observable _popout: null | HTMLElement = null;
 
   @action setTest = (test: Test[]) => {
     this._test = test;
@@ -49,6 +50,10 @@ class TestStore {
     this._result.push(result);
   };
 
+  @action setPopout = (item: null | HTMLElement) => {
+    this._popout = item;
+  };
+
   @computed get test() {
     return toJS(this._test);
   }
@@ -66,6 +71,9 @@ class TestStore {
   }
   @computed get result() {
     return toJS(this._result);
+  }
+  @computed get popout() {
+    return toJS(this._popout);
   }
 
   @action loadTest = (): void => {
