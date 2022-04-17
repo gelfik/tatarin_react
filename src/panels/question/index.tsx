@@ -2,7 +2,6 @@ import {
   Button,
   Caption,
   Div,
-  FixedLayout,
   FormItem,
   FormLayout,
   Group,
@@ -13,7 +12,7 @@ import {
   RadioGroup,
 } from "@vkontakte/vkui";
 import { observer } from "mobx-react";
-import { Fragment, useEffect } from "react";
+import { Fragment, useEffect, useState } from "react";
 import "../style.css";
 import { Icon28PlayCircle, Icon28PauseCircle } from "@vkontakte/icons";
 import { useStores } from "../../hooks/mobx";
@@ -22,6 +21,8 @@ import { useNavigation } from "../../hooks/navigation";
 const Question = observer(() => {
   const navigation = useNavigation();
   const { testStore } = useStores();
+
+  const [value, setValue] = useState("");
 
   const getNexQuestion = (): void => {
     if (testStore.test.length === testStore.index) {
@@ -43,7 +44,12 @@ const Question = observer(() => {
 
   const getAnswerList = () => {
     return testStore.activeTest?.answer_list?.map((item, i) => (
-      <Radio key={i} name="fit" value="classic">
+      <Radio
+        onChange={(e) => setValue(e.target.value)}
+        key={i}
+        name="answer"
+        value={item?.answer}
+      >
         {item?.is_text && `${item?.answer}`}
         {item?.is_photo && (
           <img width={100} height={100} src={item?.answerPhoto} alt={""} />
@@ -53,18 +59,25 @@ const Question = observer(() => {
   };
 
   useEffect(() => {
-    console.log(testStore.audioPlayStatus);
+    // console.log(testStore.audioPlayStatus);
+    setValue("");
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [testStore.audioPlayStatus]);
+  }, [testStore.index]);
 
   return (
     <Fragment>
       <PanelHeader>Вопрос {testStore.index + 1}</PanelHeader>
       <Div className={"bg_main_image"}>
-        <Group
-          className={"fill_radioButton"}
-          header={<Header>{testStore.activeTest?.ask}</Header>}
-        >
+        <Group className={"fill_radioButton"}>
+          {testStore.activeTest?.photo && (
+            <img
+              style={{ width: "100%", height: "100%" }}
+              src={testStore.activeTest?.photo}
+              alt={testStore.activeTest?.ask}
+            />
+          )}
+
+          <Header>{testStore.activeTest?.ask}</Header>
           <Div className={"inline_objects"}>
             <Caption className={"inline_objects"}>
               {testStore.audioStatus && (
@@ -90,24 +103,23 @@ const Question = observer(() => {
 
             {testStore.activeTest?.answer && (
               <FormItem top="Введите ответ">
-                <Input type="text" />
+                <Input type="text" onChange={(e) => setValue(e.target.value)} />
               </FormItem>
             )}
           </FormLayout>
-        </Group>
 
-        <FixedLayout vertical={"bottom"} style={{ left: 0 }}>
           <Div style={{ marginTop: "auto" }}>
             <Button
               className={"button_width"}
               size={"l"}
               mode={"secondary"}
               onClick={() => getNexQuestion()}
+              disabled={value === ""}
             >
               Дальше!
             </Button>
           </Div>
-        </FixedLayout>
+        </Group>
       </Div>
     </Fragment>
   );
