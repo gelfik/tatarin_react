@@ -74,35 +74,28 @@ const Question = observer(() => {
       <Div className={"bg_main_image"}>
         <Group className={"fill_radioButton"}>
           {testStore.activeTest?.photo && (
-            <img
-              style={{ width: "100%", height: "100%" }}
-              src={testStore.activeTest?.photo}
-              alt={testStore.activeTest?.ask}
-            />
+            <div className={"picture"}>
+              <img
+                src={testStore.activeTest?.photo}
+                alt={testStore.activeTest?.ask}
+              />
+            </div>
           )}
 
           <Header>{testStore.activeTest?.ask}</Header>
-          <Div>
-            <Caption>
-              {testStore.audioStatus && (
-                <>
-                  Аудиоматериал
-                  {testStore.audioPlayStatus && (
-                    <Icon28PauseCircle
-                      className={"inline_objects"}
-                      onClick={testStore.stopAudio}
-                    />
-                  )}
-                  {!testStore.audioPlayStatus && (
-                    <Icon28PlayCircle
-                      className={"inline_objects"}
-                      onClick={testStore.playAudio}
-                    />
-                  )}
-                </>
-              )}
-            </Caption>
-          </Div>
+          {testStore.audioStatus && (
+            <Div>
+              <Caption className={"music"}>
+                Аудиоматериал:&nbsp;
+                {testStore.audioPlayStatus && (
+                  <Icon28PauseCircle onClick={testStore.stopAudio} />
+                )}
+                {!testStore.audioPlayStatus && (
+                  <Icon28PlayCircle onClick={testStore.playAudio} />
+                )}
+              </Caption>
+            </Div>
+          )}
 
           <FormLayout>
             {testStore.activeTest?.answer_list?.length !== 0 && (
